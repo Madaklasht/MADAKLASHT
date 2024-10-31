@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madaklasht Rapid Delivery (MRD)</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: #fff;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 5px;
+            font-size: 24px;
+        }
+
+        header p {
+            font-size: 16px;
+        }
+
+        /* Main Form Section */
+        #orderSection {
+            margin-top: 20px;
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #orderSection h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #4CAF50;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        form button {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+        }
+
+        /* Help Button */
+        .help-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Thank You Message */
+        #thankYouMessage {
+            color: green;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Madaklasht Rapid Delivery (MRD)</h1>
+        <p>Your swift and reliable delivery service in Madaklasht!</p>
+    </header>
+
+    <!-- Order Form Section -->
+    <section id="orderSection">
+        <h2>Place Your Order</h2>
+        <p>To order, fill out the form below and submit. You’ll be redirected to WhatsApp to confirm your order details directly with us.</p>
+        <form id="orderForm">
+            <input type="text" id="orderItem" placeholder="What do you need?" required>
+            <input type="text" id="deliveryAddress" placeholder="Delivery Address" required>
+            <input type="text" id="contactNumber" placeholder="Your Contact Number" required>
+            <button type="submit">Submit Order</button>
+        </form>
+        <div id="thankYouMessage">Thank you! You'll be redirected to WhatsApp to confirm your order.</div>
+    </section>
+
+    <!-- Help Button -->
+    <button class="help-button" onclick="openWhatsAppChat()">?</button>
+
+    <script>
+        // Redirect to WhatsApp on order submission
+        document.getElementById("orderForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const item = document.getElementById("orderItem").value;
+            const address = document.getElementById("deliveryAddress").value;
+            const contact = document.getElementById("contactNumber").value;
+            const message = `Order Details:%0A- Item: ${item}%0A- Address: ${address}%0A- Contact: ${contact}`;
+
+            // WhatsApp URL with prefilled message
+            const whatsappUrl = `https://wa.me/03431367741?text=${message}`;
+            window.location.href = whatsappUrl;
+            
+            showThankYouMessage();
+        });
+
+        // Show Thank You message briefly before WhatsApp redirect
+        function showThankYouMessage() {
+            const messageDiv = document.getElementById("thankYouMessage");
+            messageDiv.style.display = "block";
+            setTimeout(() => messageDiv.style.display = "none", 3000);
+        }
+
+        // Open WhatsApp directly for customer support
+        function openWhatsAppChat() {
+            const whatsappUrl = "https://wa.me/03431367741";
+            window.location.href = whatsappUrl;
+        }
+    </script>
+</body>
+</html>
